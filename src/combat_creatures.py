@@ -13,8 +13,8 @@ ENEMY_POTIONS_REQUIRED: dict = {
 
 def count_potions_needed(enemies: str) -> int:
     potion_count: int = 0
-    for index in range(0, len(enemies), 2):
-        battle = enemies[index:index+2]
+    for index in range(0, len(enemies), 3):
+        battle = enemies[index:index+3]
         battle = battle.replace("x", "")
         match len(battle):
             case 1:
@@ -23,12 +23,17 @@ def count_potions_needed(enemies: str) -> int:
                 potion_count += ENEMY_POTIONS_REQUIRED.get(battle[0], 0)
                 potion_count += ENEMY_POTIONS_REQUIRED.get(battle[1], 0)
                 potion_count += 2
+            case 3:
+                potion_count += ENEMY_POTIONS_REQUIRED.get(battle[0], 0)
+                potion_count += ENEMY_POTIONS_REQUIRED.get(battle[1], 0)
+                potion_count += ENEMY_POTIONS_REQUIRED.get(battle[2], 0)
+                potion_count += 6
     return potion_count
 
 
 if __name__ == "__main__":
     # TODO: Use argparser to read in file name
-    with open("data/everybody_codes_e2024_q01_p2.txt", "r") as f:
+    with open("data/everybody_codes_e2024_q01_p3.txt", "r") as f:
         enemies: str = f.readline()
 
     potions_needed: int = count_potions_needed(enemies)
